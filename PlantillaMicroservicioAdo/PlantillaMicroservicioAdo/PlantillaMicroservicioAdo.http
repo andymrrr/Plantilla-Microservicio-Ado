@@ -1,0 +1,6 @@
+@PlantillaMicroservicioAdo_HostAddress = http://localhost:5003
+
+GET {{PlantillaMicroservicioAdo_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
