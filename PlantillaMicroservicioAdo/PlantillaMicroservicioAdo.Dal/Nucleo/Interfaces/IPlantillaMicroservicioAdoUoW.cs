@@ -1,5 +1,4 @@
-﻿
-using PlantillaMicroservicioAdo.Modelo;
+﻿using PlantillaMicroservicioAdo.Modelo;
 
 namespace PlantillaMicroservicioAdo.Dal.Nucleo.Interfaces
 {

@@ -1,6 +1,5 @@
 ﻿using System.Data;
 
-
 namespace PlantillaMicroservicioAdo.Dal.Nucleo.Interfaces
 {
     public interface IRepositorio<T> where T : class

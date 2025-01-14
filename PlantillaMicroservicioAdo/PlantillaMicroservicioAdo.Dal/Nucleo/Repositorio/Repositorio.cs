@@ -1,11 +1,8 @@
-﻿using Microsoft.Data.SqlClient;
-using PlantillaMicroservicioAdo.Dal.Nucleo.Interfaces;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Microsoft.Data.SqlClient;
+using PlantillaMicroservicioAdo.Dal.Nucleo.Interfaces;
 
 namespace PlantillaMicroservicioAdo.Dal.Nucleo.Repositorio
 {
@@ -74,10 +71,8 @@ namespace PlantillaMicroservicioAdo.Dal.Nucleo.Repositorio
             command.ExecuteNonQuery();
         }
 
-
         private T Mapear(IDataReader reader)
         {
-
             throw new NotImplementedException("Implementar el mapeo para la entidad.");
         }
     }

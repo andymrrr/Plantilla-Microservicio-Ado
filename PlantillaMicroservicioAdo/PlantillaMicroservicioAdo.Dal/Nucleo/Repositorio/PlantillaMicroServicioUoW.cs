@@ -1,16 +1,13 @@
-﻿using Microsoft.Data.SqlClient;
+﻿using System;
+using System.Data;
+using System.Threading.Tasks;
+using Microsoft.Data.SqlClient;
 using PlantillaMicroservicioAdo.Dal.Nucleo.Interfaces;
 using PlantillaMicroservicioAdo.Modelo;
-using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PlantillaMicroservicioAdo.Dal.Nucleo.Repositorio
 {
-    public class PlantillaMicroServicioUoW : IPlantillaMicroservicioAdoUoW
+    public class PlantillaMicroServicioAdUoW : IPlantillaMicroservicioAdoUoW
     {
         private readonly string _connectionString;
         private IDbTransaction _transaction;
@@ -18,7 +15,7 @@ namespace PlantillaMicroservicioAdo.Dal.Nucleo.Repositorio
 
         public IRepositorio<Libro> Libros { get; }
 
-        public PlantillaMicroServicioUoW(string connectionString)
+        public PlantillaMicroServicioAdUoW(string connectionString)
         {
             _connectionString = connectionString;
             _connection = new SqlConnection(_connectionString);
@@ -44,10 +41,6 @@ namespace PlantillaMicroservicioAdo.Dal.Nucleo.Repositorio
             _transaction.Dispose();
             _transaction = null;
         }
-
-
-
-
 
         public void Dispose()
         {
