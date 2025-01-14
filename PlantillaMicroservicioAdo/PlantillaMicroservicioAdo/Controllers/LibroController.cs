@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using MediatR;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace PlantillaMicroservicioAdo.Controllers
@@ -7,5 +8,11 @@ namespace PlantillaMicroservicioAdo.Controllers
     [ApiController]
     public class LibroController : ControllerBase
     {
+        private readonly IMediator _mediator;
+        public LibroController(IMediator mediator)
+        {
+            _mediator = mediator;
+        }
+
     }
 }
