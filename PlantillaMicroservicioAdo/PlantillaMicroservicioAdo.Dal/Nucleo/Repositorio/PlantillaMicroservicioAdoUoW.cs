@@ -7,7 +7,7 @@ using PlantillaMicroservicioAdo.Modelo;
 
 namespace PlantillaMicroservicioAdo.Dal.Nucleo.Repositorio
 {
-    public class PlantillaMicroServicioAdUoW : IPlantillaMicroservicioAdoUoW
+    public class PlantillaMicroServicioAdoUoW : IPlantillaMicroservicioAdoUoW
     {
         private readonly string _connectionString;
         private IDbTransaction _transaction;
@@ -15,7 +15,7 @@ namespace PlantillaMicroservicioAdo.Dal.Nucleo.Repositorio
 
         public IRepositorio<Libro> Libros { get; }
 
-        public PlantillaMicroServicioAdUoW(string connectionString)
+        public PlantillaMicroServicioAdoUoW(string connectionString)
         {
             _connectionString = connectionString;
             _connection = new SqlConnection(_connectionString);
