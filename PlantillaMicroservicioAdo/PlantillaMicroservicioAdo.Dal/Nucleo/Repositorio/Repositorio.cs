@@ -70,10 +70,70 @@ namespace PlantillaMicroservicioAdo.Dal.Nucleo.Repositorio
             connection.Open();
             command.ExecuteNonQuery();
         }
+        public async Task<T> ObtenerAsync(string query, CommandType commandType, params SqlParameter[] parametros)
+        {
+            using var connection = new SqlConnection(_connectionString);
+            using var command = new SqlCommand(query, connection)
+            {
+                CommandType = commandType
+            };
+
+            if (parametros != null)
+            {
+                command.Parameters.AddRange(parametros);
+            }
+
+            connection.Open();
+            using var reader = await command.ExecuteReaderAsync();
+            return  reader.Read() ? Mapear(reader) : default;
+        }
+        public async Task<bool> ExisteAsync(string query, CommandType commandType, params SqlParameter[]? parametros)
+        {
+            // Abre la conexión dentro de un bloque using
+            using var connection = new SqlConnection(_connectionString);
+            using var command = new SqlCommand(query, connection)
+            {
+                CommandType = commandType
+            };
+
+            if (parametros != null)
+            {
+                command.Parameters.AddRange(parametros); // Agrega los parámetros
+            }
+
+            await connection.OpenAsync(); //
+            var resultado = await command.ExecuteScalarAsync(); 
+
+            
+            return resultado != null && Convert.ToInt32(resultado) > 0;
+        }
 
         private T Mapear(IDataReader reader)
         {
-            throw new NotImplementedException("Implementar el mapeo para la entidad.");
+            
+            T entidad = Activator.CreateInstance<T>();
+
+           
+            var propiedades = typeof(T).GetProperties();
+
+            
+            for (int i = 0; i < reader.FieldCount; i++)
+            {
+                string nombreColumna = reader.GetName(i);
+
+                var propiedad = propiedades.FirstOrDefault(p =>
+                    string.Equals(p.Name, nombreColumna, StringComparison.OrdinalIgnoreCase));
+
+                if (propiedad != null && !reader.IsDBNull(i))
+                {
+                    
+                    object valor = Convert.ChangeType(reader.GetValue(i), propiedad.PropertyType);
+                    propiedad.SetValue(entidad, valor);
+                }
+            }
+
+            return entidad;
         }
+
     }
 }

@@ -12,7 +12,7 @@ namespace PlantillaMicroservicioAdo.Dal
     {
         public static IServiceCollection AddServicioDatos(this IServiceCollection servicio, IConfiguration configuracion)
         {
-            var sqliteDb = new SQLiteDatabase();
+            var sqliteDb = new SqlServerInMemoryDatabase();
             string connectionString = sqliteDb.GetConnectionString();
 
             servicio.AddSingleton(sqliteDb); 
